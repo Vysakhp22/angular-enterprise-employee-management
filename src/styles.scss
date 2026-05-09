@@ -3,3 +3,9 @@
 @plugin "daisyui" {
     themes: light --default;
 }
+
+*:focus,
+*:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+}
