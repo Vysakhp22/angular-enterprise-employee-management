@@ -12,6 +12,9 @@
                     </label>
                     <input [formField]="loginForm.email" type="email" id="email" placeholder="you@example.com"
                         class="input input-bordered w-full" autocomplete="email" />
+                    @if (loginForm.email().touched() && loginForm.email().errors(); as errors) {
+                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
+                    }
                 </div>
 
                 <div class="form-control">
@@ -21,6 +24,9 @@
                     </label>
                     <input [formField]="loginForm.password" type="password" id="password" placeholder="••••••••"
                         class="input input-bordered w-full" autocomplete="current-password" />
+                    @if (loginForm.password().touched() && loginForm.password().errors(); as errors) {
+                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
+                    }
                 </div>
 
                 <button type="button" class="btn btn-neutral w-full mt-1"
@@ -29,7 +35,7 @@
 
             <p class="text-center text-sm text-base-content/50 mt-6">
                 Don't have an account?
-                <a class="link link-hover text-base-content font-semibold">Sign up</a>
+                <a class="link link-hover text-base-content font-semibold" href="/signup">Sign up</a>
             </p>
 
         </div>

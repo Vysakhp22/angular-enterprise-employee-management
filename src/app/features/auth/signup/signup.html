@@ -1,0 +1,80 @@
+<div class="min-h-screen bg-base-200 flex items-center justify-center px-4">
+    <div class="card bg-base-100 w-full max-w-sm shadow-lg">
+        <div class="card-body gap-1 px-8 py-10">
+
+            <h2 class="text-2xl font-bold text-base-content">Create account</h2>
+            <p class="text-sm text-base-content/50 mb-6">Fill in the details to get started</p>
+
+            <form class="flex flex-col gap-5">
+                <div class="form-control">
+                    <label class="label pb-1" for="name">
+                        <span class="label-text font-medium">Full Name</span>
+                    </label>
+                    <input [formField]="signupForm.name" type="text" id="name" placeholder="John Doe"
+                        class="input input-bordered w-full" autocomplete="name" />
+                    @if (signupForm.name().touched() && signupForm.name().errors(); as errors) {
+                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
+                    }
+                </div>
+
+                <div class="form-control">
+                    <label class="label pb-1" for="email">
+                        <span class="label-text font-medium">Email</span>
+                    </label>
+                    <input [formField]="signupForm.email" type="email" id="email" placeholder="you@example.com"
+                        class="input input-bordered w-full" autocomplete="email" />
+                    @if (signupForm.email().touched() && signupForm.email().errors(); as errors) {
+                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
+                    }
+                </div>
+
+                <div class="form-control">
+                    <label class="label pb-1" for="role">
+                        <span class="label-text font-medium">Role</span>
+                    </label>
+                    <select [formField]="signupForm.role" id="role" class="select select-bordered w-full">
+                        <option value="" disabled>Select a role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="HR">HR</option>
+                        <option value="Manager">Manager</option>
+                    </select>
+                    @if (signupForm.role().touched() && signupForm.role().errors(); as errors) {
+                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
+                    }
+                </div>
+
+                <div class="form-control">
+                    <label class="label pb-1" for="password">
+                        <span class="label-text font-medium">Password</span>
+                    </label>
+                    <input [formField]="signupForm.password" type="password" id="password" placeholder="••••••••"
+                        class="input input-bordered w-full" autocomplete="new-password" />
+                    @if (signupForm.password().touched() && signupForm.password().errors(); as errors) {
+                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
+                    }
+                </div>
+
+                <div class="form-control">
+                    <label class="label pb-1" for="confirmPassword">
+                        <span class="label-text font-medium">Confirm Password</span>
+                    </label>
+                    <input [formField]="signupForm.confirmPassword" type="password" id="confirmPassword"
+                        placeholder="••••••••" class="input input-bordered w-full" autocomplete="new-password" />
+                    @if (signupForm.confirmPassword().touched() && signupForm.confirmPassword().errors(); as errors) {
+                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
+                    }
+                </div>
+
+                <button type="button" class="btn btn-neutral w-full mt-1" (click)="onSubmit()">
+                    {{ signupForm().submitting() ? 'Creating account...' : 'Sign up' }}
+                </button>
+            </form>
+
+            <p class="text-center text-sm text-base-content/50 mt-6">
+                Already have an account?
+                <a class="link link-hover text-base-content font-semibold" href="/">Sign in</a>
+            </p>
+
+        </div>
+    </div>
+</div>
