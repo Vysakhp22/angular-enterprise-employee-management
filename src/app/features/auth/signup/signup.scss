@@ -1,0 +1,301 @@
+// Reuse the same design language as login.
+// Both pages share identical layout/component classes.
+
+.auth-page {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+// ── Left branding panel ───────────────────────────────────────────────────────
+.auth-brand {
+  flex: 0 0 42%;
+  background: linear-gradient(145deg, #4f46e5 0%, #6366f1 50%, #7c3aed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.06);
+    pointer-events: none;
+  }
+  &::before {
+    width: 28rem;
+    height: 28rem;
+    top: -8rem;
+    right: -8rem;
+  }
+  &::after {
+    width: 20rem;
+    height: 20rem;
+    bottom: -6rem;
+    left: -6rem;
+  }
+
+  @media (max-width: 768px) {
+    flex: none;
+    padding: 2.5rem 2rem;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 360px;
+    width: 100%;
+  }
+
+  &__logo {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: rgb(255 255 255 / 0.15);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.75rem;
+    color: #fff;
+
+    svg { width: 1.75rem; height: 1.75rem; }
+  }
+
+  &__name {
+    font-size: 1.625rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  &__tagline {
+    font-size: 0.9375rem;
+    color: rgb(255 255 255 / 0.72);
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+  }
+
+  &__features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: rgb(255 255 255 / 0.88);
+      font-size: 0.9375rem;
+    }
+  }
+}
+
+.feature-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg { width: 0.75rem; height: 0.75rem; color: #fff; }
+}
+
+// ── Right form panel ──────────────────────────────────────────────────────────
+.auth-form-panel {
+  flex: 1;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  border-radius: 1.5rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.07);
+  padding: 2.5rem;
+
+  &__header {
+    margin-bottom: 1.75rem;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.375rem;
+  }
+
+  &__sub {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+}
+
+// ── Form ──────────────────────────────────────────────────────────────────────
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  flex: 1;
+}
+
+// Side-by-side password fields
+.auth-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.auth-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+
+  svg { width: 1rem; height: 1rem; }
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.6875rem 0.875rem 0.6875rem 2.625rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  color: #0f172a;
+  background: #f8fafc;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  &:focus {
+    border-color: #6366f1;
+    background: #fff;
+  }
+
+  &::placeholder { color: #94a3b8; }
+}
+
+.auth-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.9rem;
+  padding-right: 2.25rem;
+  cursor: pointer;
+}
+
+.auth-error {
+  font-size: 0.75rem;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.auth-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6366f1;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+
+  &--muted {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #94a3b8;
+
+    &:hover { color: #64748b; }
+  }
+}
+
+.auth-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.875rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgb(99 102 241 / 0.35);
+
+  &:hover {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    box-shadow: 0 4px 16px rgb(99 102 241 / 0.45);
+    transform: translateY(-1px);
+  }
+
+  &:active { transform: translateY(0); }
+}
+
+.auth-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgb(255 255 255 / 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

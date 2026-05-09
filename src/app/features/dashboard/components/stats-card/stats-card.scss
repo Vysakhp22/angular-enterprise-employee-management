@@ -1,0 +1,73 @@
+.stats-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: #fff;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.08);
+    transform: translateY(-1px);
+  }
+
+  &__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+  }
+
+  &__value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.1;
+  }
+
+  &__sub {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+  }
+
+  // Themes
+  &--blue &__icon {
+    background: #eff6ff;
+    color: #2563eb;
+  }
+
+  &--green &__icon {
+    background: #f0fdf4;
+    color: #16a34a;
+  }
+
+  &--purple &__icon {
+    background: #faf5ff;
+    color: #7c3aed;
+  }
+
+  &--amber &__icon {
+    background: #fffbeb;
+    color: #d97706;
+  }
+}

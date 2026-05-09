@@ -1,0 +1,148 @@
+<div class="dashboard">
+
+  <!-- ─── Header ─────────────────────────────────────────────── -->
+  <header class="dashboard-header">
+    <div class="header-inner">
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <div class="brand-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">Employee Management</h1>
+          <p class="brand-sub">Human Resources Portal</p>
+        </div>
+      </div>
+
+      <!-- Right side -->
+      <div class="header-actions">
+        <div class="admin-pill">
+          <div class="admin-avatar">A</div>
+          <div class="hidden sm:block">
+            <p class="admin-name">Admin User</p>
+            <p class="admin-role">Super Admin</p>
+          </div>
+        </div>
+        <button class="logout-btn" (click)="logout()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+          </svg>
+          <span class="hidden sm:inline">Logout</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── Main Content ─────────────────────────────────────────── -->
+  <main class="dashboard-main">
+
+    <!-- Page title -->
+    <div class="page-heading">
+      <div>
+        <h2 class="page-title">Dashboard Overview</h2>
+        <p class="page-sub">Track, manage and grow your workforce</p>
+      </div>
+      <button class="add-btn" (click)="openAddModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+        Add Employee
+      </button>
+    </div>
+
+    <!-- ─── Stats Grid ─────────────────────────────────────────── -->
+    <section class="stats-grid">
+      <app-stats-card title="Total Employees" [value]="stats().total" theme="blue" label="All staff members">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+        </svg>
+      </app-stats-card>
+
+      <app-stats-card title="Active Employees" [value]="stats().active" theme="green" label="Currently working">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </app-stats-card>
+
+      <app-stats-card title="Departments" [value]="stats().departments" theme="purple" label="Active divisions">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+        </svg>
+      </app-stats-card>
+
+      <app-stats-card title="Administrators" [value]="stats().admins" theme="amber" label="System admins">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+        </svg>
+      </app-stats-card>
+    </section>
+
+    <!-- ─── Filters & Search ──────────────────────────────────── -->
+    <div class="toolbar-card">
+      <div class="toolbar-left">
+        <!-- Search -->
+        <div class="search-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search by name or email..."
+            [value]="searchQuery()"
+            (input)="onSearch($event)"
+          />
+        </div>
+
+        <!-- Department filter -->
+        <select class="filter-select" [value]="selectedDepartment()" (change)="onDepartmentChange($event)">
+          <option value="">All Departments</option>
+          @for (dept of departments; track dept) {
+            <option [value]="dept">{{ dept }}</option>
+          }
+        </select>
+
+        <!-- Status filter -->
+        <select class="filter-select" [value]="selectedStatus()" (change)="onStatusChange($event)">
+          <option value="">All Statuses</option>
+          @for (status of statuses; track status) {
+            <option [value]="status">
+              @if (status === 'active') { Active }
+              @else if (status === 'inactive') { Inactive }
+              @else { On Leave }
+            </option>
+          }
+        </select>
+      </div>
+
+      <!-- Clear filters -->
+      @if (hasActiveFilters) {
+        <button class="clear-btn" (click)="clearFilters()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3.5 h-3.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Clear filters
+        </button>
+      }
+    </div>
+
+    <!-- ─── Employee Table ────────────────────────────────────── -->
+    <app-employee-table
+      [employees]="filteredEmployees()"
+      (editEmployee)="openEditModal($event)"
+      (deleteEmployee)="onDeleteEmployee($event)"
+    />
+
+  </main>
+</div>
+
+<!-- ─── Employee Modal ────────────────────────────────────────── -->
+@if (isModalOpen()) {
+  <app-employee-modal
+    [employee]="selectedEmployee()"
+    (save)="onSaveEmployee($event)"
+    (cancel)="closeModal()"
+  />
+}

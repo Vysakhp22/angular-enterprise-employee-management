@@ -1,80 +1,187 @@
-<div class="min-h-screen bg-base-200 flex items-center justify-center px-4">
-    <div class="card bg-base-100 w-full max-w-sm shadow-lg">
-        <div class="card-body gap-1 px-8 py-10">
+<div class="auth-page">
 
-            <h2 class="text-2xl font-bold text-base-content">Create account</h2>
-            <p class="text-sm text-base-content/50 mb-6">Fill in the details to get started</p>
+  <!-- ── Left branding panel ───────────────────────────────── -->
+  <div class="auth-brand">
+    <div class="auth-brand__inner">
+      <div class="auth-brand__logo">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+        </svg>
+      </div>
+      <h1 class="auth-brand__name">Employee Management</h1>
+      <p class="auth-brand__tagline">Your complete HR & workforce portal</p>
 
-            <form class="flex flex-col gap-5">
-                <div class="form-control">
-                    <label class="label pb-1" for="name">
-                        <span class="label-text font-medium">Full Name</span>
-                    </label>
-                    <input [formField]="signupForm.name" type="text" id="name" placeholder="John Doe"
-                        class="input input-bordered w-full" autocomplete="name" />
-                    @if (signupForm.name().touched() && signupForm.name().errors(); as errors) {
-                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
-                    }
-                </div>
-
-                <div class="form-control">
-                    <label class="label pb-1" for="email">
-                        <span class="label-text font-medium">Email</span>
-                    </label>
-                    <input [formField]="signupForm.email" type="email" id="email" placeholder="you@example.com"
-                        class="input input-bordered w-full" autocomplete="email" />
-                    @if (signupForm.email().touched() && signupForm.email().errors(); as errors) {
-                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
-                    }
-                </div>
-
-                <div class="form-control">
-                    <label class="label pb-1" for="role">
-                        <span class="label-text font-medium">Role</span>
-                    </label>
-                    <select [formField]="signupForm.role" id="role" class="select select-bordered w-full">
-                        <option value="" disabled>Select a role</option>
-                        <option value="Admin">Admin</option>
-                        <option value="HR">HR</option>
-                        <option value="Manager">Manager</option>
-                    </select>
-                    @if (signupForm.role().touched() && signupForm.role().errors(); as errors) {
-                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
-                    }
-                </div>
-
-                <div class="form-control">
-                    <label class="label pb-1" for="password">
-                        <span class="label-text font-medium">Password</span>
-                    </label>
-                    <input [formField]="signupForm.password" type="password" id="password" placeholder="••••••••"
-                        class="input input-bordered w-full" autocomplete="new-password" />
-                    @if (signupForm.password().touched() && signupForm.password().errors(); as errors) {
-                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
-                    }
-                </div>
-
-                <div class="form-control">
-                    <label class="label pb-1" for="confirmPassword">
-                        <span class="label-text font-medium">Confirm Password</span>
-                    </label>
-                    <input [formField]="signupForm.confirmPassword" type="password" id="confirmPassword"
-                        placeholder="••••••••" class="input input-bordered w-full" autocomplete="new-password" />
-                    @if (signupForm.confirmPassword().touched() && signupForm.confirmPassword().errors(); as errors) {
-                        <p class="text-error text-xs mt-1">{{ errors[0].message }}</p>
-                    }
-                </div>
-
-                <button type="button" class="btn btn-neutral w-full mt-1" (click)="onSubmit()">
-                    {{ signupForm().submitting() ? 'Creating account...' : 'Sign up' }}
-                </button>
-            </form>
-
-            <p class="text-center text-sm text-base-content/50 mt-6">
-                Already have an account?
-                <a class="link link-hover text-base-content font-semibold" href="/">Sign in</a>
-            </p>
-
-        </div>
+      <ul class="auth-brand__features">
+        <li>
+          <span class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+          </span>
+          Get started in minutes
+        </li>
+        <li>
+          <span class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+          </span>
+          Manage employees across departments
+        </li>
+        <li>
+          <span class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+          </span>
+          Role-based access control
+        </li>
+      </ul>
     </div>
+  </div>
+
+  <!-- ── Right form panel ──────────────────────────────────── -->
+  <div class="auth-form-panel">
+    <div class="auth-card">
+
+      <div class="auth-card__header">
+        <h2 class="auth-card__title">Create your account</h2>
+        <p class="auth-card__sub">Fill in the details below to get started</p>
+      </div>
+
+      <form class="auth-form" (submit)="$event.preventDefault()">
+
+        <!-- Full Name -->
+        <div class="auth-field">
+          <label class="auth-label" for="name">Full Name</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
+            </span>
+            <input
+              [formField]="signupForm.name"
+              type="text"
+              id="name"
+              placeholder="Jane Doe"
+              class="auth-input"
+              autocomplete="name"
+            />
+          </div>
+          @if (signupForm.name().touched() && signupForm.name().errors(); as errors) {
+            <p class="auth-error">{{ errors[0].message }}</p>
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="auth-field">
+          <label class="auth-label" for="email">Email address</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+            </span>
+            <input
+              [formField]="signupForm.email"
+              type="email"
+              id="email"
+              placeholder="you@company.com"
+              class="auth-input"
+              autocomplete="email"
+            />
+          </div>
+          @if (signupForm.email().touched() && signupForm.email().errors(); as errors) {
+            <p class="auth-error">{{ errors[0].message }}</p>
+          }
+        </div>
+
+        <!-- Role -->
+        <div class="auth-field">
+          <label class="auth-label" for="role">Role</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+              </svg>
+            </span>
+            <select
+              [formField]="signupForm.role"
+              id="role"
+              class="auth-input auth-select"
+            >
+              <option value="" disabled>Select a role</option>
+              <option value="Admin">Admin</option>
+              <option value="HR">HR</option>
+              <option value="Manager">Manager</option>
+            </select>
+          </div>
+          @if (signupForm.role().touched() && signupForm.role().errors(); as errors) {
+            <p class="auth-error">{{ errors[0].message }}</p>
+          }
+        </div>
+
+        <!-- Password row -->
+        <div class="auth-field-row">
+          <div class="auth-field">
+            <label class="auth-label" for="password">Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+              </span>
+              <input
+                [formField]="signupForm.password"
+                type="password"
+                id="password"
+                placeholder="••••••••"
+                class="auth-input"
+                autocomplete="new-password"
+              />
+            </div>
+            @if (signupForm.password().touched() && signupForm.password().errors(); as errors) {
+              <p class="auth-error">{{ errors[0].message }}</p>
+            }
+          </div>
+
+          <div class="auth-field">
+            <label class="auth-label" for="confirmPassword">Confirm Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </span>
+              <input
+                [formField]="signupForm.confirmPassword"
+                type="password"
+                id="confirmPassword"
+                placeholder="••••••••"
+                class="auth-input"
+                autocomplete="new-password"
+              />
+            </div>
+            @if (signupForm.confirmPassword().touched() && signupForm.confirmPassword().errors(); as errors) {
+              <p class="auth-error">{{ errors[0].message }}</p>
+            }
+          </div>
+        </div>
+
+        <button type="button" class="auth-submit" (click)="onSubmit()">
+          @if (signupForm().submitting()) {
+            <span class="auth-spinner"></span>
+            Creating account...
+          } @else {
+            Create account
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          }
+        </button>
+      </form>
+
+      <p class="auth-footer">
+        Already have an account?
+        <a class="auth-link" href="/">Sign in</a>
+      </p>
+
+    </div>
+  </div>
+
 </div>

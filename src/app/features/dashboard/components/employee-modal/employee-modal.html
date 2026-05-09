@@ -1,0 +1,137 @@
+<dialog #dialogEl class="modal" (close)="onCancel()">
+  <div class="modal-box">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">{{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}</h2>
+        <p class="modal-subtitle">{{ isEditMode ? 'Update the employee details below' : 'Fill in the details to add a new employee' }}</p>
+      </div>
+      <button class="modal-close" (click)="onCancel()" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-form">
+
+      <!-- Name -->
+      <div class="form-group">
+        <label class="form-label" for="emp-name">Full Name</label>
+        <input
+          id="emp-name"
+          type="text"
+          class="form-input"
+          [class.form-input--error]="isInvalid('name')"
+          placeholder="e.g. Jane Doe"
+          formControlName="name"
+        />
+        @if (isInvalid('name')) {
+          <p class="form-error">
+            @if (form.get('name')?.errors?.['required']) { Name is required. }
+            @else { Name must be at least 2 characters. }
+          </p>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label class="form-label" for="emp-email">Email Address</label>
+        <input
+          id="emp-email"
+          type="email"
+          class="form-input"
+          [class.form-input--error]="isInvalid('email')"
+          placeholder="e.g. jane@company.com"
+          formControlName="email"
+        />
+        @if (isInvalid('email')) {
+          <p class="form-error">
+            @if (form.get('email')?.errors?.['required']) { Email is required. }
+            @else { Enter a valid email address. }
+          </p>
+        }
+      </div>
+
+      <!-- Department & Role (side by side) -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="emp-department">Department</label>
+          <select
+            id="emp-department"
+            class="form-select"
+            [class.form-input--error]="isInvalid('department')"
+            formControlName="department"
+          >
+            <option value="" disabled>Select department</option>
+            @for (dept of departments; track dept) {
+              <option [value]="dept">{{ dept }}</option>
+            }
+          </select>
+          @if (isInvalid('department')) {
+            <p class="form-error">Please select a department.</p>
+          }
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="emp-role">Role</label>
+          <select
+            id="emp-role"
+            class="form-select"
+            [class.form-input--error]="isInvalid('role')"
+            formControlName="role"
+          >
+            <option value="" disabled>Select role</option>
+            @for (role of roles; track role) {
+              <option [value]="role">{{ formatLabel(role) }}</option>
+            }
+          </select>
+          @if (isInvalid('role')) {
+            <p class="form-error">Please select a role.</p>
+          }
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="form-group">
+        <label class="form-label">Status</label>
+        <div class="status-options">
+          @for (status of statuses; track status) {
+            <label class="status-option" [class.status-option--active]="form.get('status')?.value === status">
+              <input
+                type="radio"
+                [value]="status"
+                formControlName="status"
+                class="sr-only"
+              />
+              <span class="status-dot" [class]="'status-dot--' + status"></span>
+              {{ formatLabel(status) }}
+            </label>
+          }
+        </div>
+        @if (isInvalid('status')) {
+          <p class="form-error">Please select a status.</p>
+        }
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="btn-submit">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+          {{ isEditMode ? 'Save Changes' : 'Add Employee' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- clicking outside the modal-box (backdrop area) closes the dialog -->
+  <form method="dialog" class="modal-backdrop">
+    <button type="submit">close</button>
+  </form>
+</dialog>

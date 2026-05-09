@@ -1,0 +1,12 @@
+<div class="stats-card" [class]="'stats-card--' + theme()">
+  <div class="stats-card__icon">
+    <ng-content />
+  </div>
+  <div class="stats-card__body">
+    <p class="stats-card__label">{{ title() }}</p>
+    <p class="stats-card__value">{{ value() }}</p>
+    @if (label()) {
+      <p class="stats-card__sub">{{ label() }}</p>
+    }
+  </div>
+</div>
