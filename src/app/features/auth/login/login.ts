@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { LoginRequest } from '../../../core/models/login';
+import { AuthService } from '../../../core/services/auth-service';
 import { form, FormField, required, submit } from '@angular/forms/signals';
 
 @Component({
@@ -15,6 +16,8 @@ export class Login {
     password: ''
   });
 
+  private readonly authService = inject(AuthService);
+
   protected loginForm = form(this.loginModel, (schemaPath) => {
     required(schemaPath.email, { message: 'Email is required' });
     required(schemaPath.password, { message: 'Password is required' });
@@ -22,16 +25,16 @@ export class Login {
 
 
   protected async onSubmit() {
-    // 1. At this point all fields are already marked as touched
-    // 2. If form is invalid - this function will NOT be called
-    // 3. f().submitting() === true during execution
-    await submit(this.loginForm, async (f) => {
-      if (!f().valid) {
-        console.log('Form is invalid:', f().errors);
-        return;
+    const success = await submit(this.loginForm, async (f) => {
+      const result = this.authService.login(f().value());
+      if (!result.success) {
+        return { kind: 'loginError', message: result.message };
       }
-      // Handle form submission, e.g., call an authentication service
-      console.log('Form submitted with:', f().value());
+      return;
     });
+
+    if (success) {
+      console.log('Login successful');
+    }
   }
 }
