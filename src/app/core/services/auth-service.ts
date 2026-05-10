@@ -2,6 +2,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { StorageService } from './storage-service';
 import { SignupRequest } from '../models/signup';
 import { LoginRequest } from '../models/login';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -57,6 +58,18 @@ export class AuthService {
   logout(): void {
     this._authUser.set(null);
     this._storageService.delete(AuthService.AUTH_KEY);
+  }
+
+// This is a mock implementation. In a real application, you would make an HTTP request to your backend API to refresh the token.
+  refreshToken(): Observable<{ accessToken: string }> {
+    return new Observable(observer => {
+      // Simulate an API call to refresh the token
+      setTimeout(() => {
+        const newToken = 'newlyGeneratedAccessToken';
+        observer.next({ accessToken: newToken });
+        observer.complete();
+      }, 1000);
+    });
   }
 
 
