@@ -1,59 +1,111 @@
-# StudyProject
+# Angular Enterprise Employee Management
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.10.
+An Angular 21 standalone employee management application with authentication, route protection, and a dashboard for managing employee records.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- User signup and login flows
+- Route guard for protected dashboard access
+- Employee dashboard with summary stats
+- Search and filter employees by name, email, department, and status
+- Add, edit, and delete employee records
+- Local storage–backed mock data and auth state
+- Token attachment and refresh flow scaffold via HTTP interceptor
+- Tailwind CSS and DaisyUI-based styling setup
 
-```bash
-ng serve
+## Tech Stack
+
+- Angular 21
+- TypeScript
+- SCSS
+- HTML
+- Tailwind CSS 4
+- DaisyUI
+- Vitest
+
+## Project Structure
+
+```text
+src/
+  app/
+    core/
+      guards/
+      interceptors/
+      models/
+      services/
+    features/
+      auth/
+        login/
+        signup/
+      dashboard/
+        components/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Application Flow
 
-## Code scaffolding
+- `/` loads the login screen
+- `/signup` loads the signup screen
+- `/dashboard` loads the protected employee dashboard
+- Unmatched routes redirect to `/`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Authentication state is stored in local storage, and dashboard access is protected by `authGuard`.
 
-```bash
-ng generate component component-name
-```
+## Employee Management
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The dashboard supports:
 
-```bash
-ng generate --help
-```
+- Viewing seeded employee records
+- Tracking totals, active employees, departments, and admin counts
+- Filtering employees using search, department, and status filters
+- Creating new employees
+- Updating existing employees
+- Removing employees
 
-## Building
+The app currently uses mocked employee data and browser storage instead of a backend API.
 
-To build the project run:
+## Getting Started
 
-```bash
-ng build
-```
+### Prerequisites
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Node.js
+- npm
+- Angular CLI
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Installation
 
 ```bash
-ng e2e
+npm install
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Run the development server
 
-## Additional Resources
+```bash
+npm start
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Then open `http://localhost:4200/` in your browser.
+
+## Available Scripts
+
+- `npm start` – start the development server
+- `npm run build` – create a production build
+- `npm run watch` – build in watch mode
+- `npm test` – run unit tests with Vitest
+
+## Notes
+
+- Authentication and employee persistence are currently mock implementations stored in the browser.
+- The interceptor includes a sample token refresh flow intended as a foundation for real backend integration.
+- This project was generated with Angular CLI and customized into an employee management application.
+
+## Future Improvements
+
+- Connect authentication to a real backend API
+- Persist employee data in a database
+- Add role-based authorization
+- Add form validation and richer error handling
+- Add end-to-end tests
+
+## License
+
+This project is available for learning and internal development purposes.
