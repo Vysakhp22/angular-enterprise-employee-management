@@ -2,12 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
 import { SignupRequest } from '../../../core/models/signup';
 import { AuthService } from '../../../core/services/auth-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-signup',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })

@@ -2,12 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { LoginRequest } from '../../../core/models/login';
 import { AuthService } from '../../../core/services/auth-service';
 import { form, FormField, required, submit } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
