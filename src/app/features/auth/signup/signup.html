@@ -63,8 +63,8 @@
               autocomplete="name"
             />
           </div>
-          @if (signupForm.name().touched() && signupForm.name().errors(); as errors) {
-            <p class="auth-error">{{ errors[0].message }}</p>
+          @if (signupForm.name().touched() && signupForm.name().invalid()) {
+            <p class="auth-error">{{ signupForm.name().errors()[0].message }}</p>
           }
         </div>
 
@@ -86,8 +86,8 @@
               autocomplete="email"
             />
           </div>
-          @if (signupForm.email().touched() && signupForm.email().errors(); as errors) {
-            <p class="auth-error">{{ errors[0].message }}</p>
+          @if (signupForm.email().touched() && signupForm.email().invalid()) {
+            <p class="auth-error">{{ signupForm.email().errors()[0].message }}</p>
           }
         </div>
 
@@ -111,8 +111,8 @@
               <option value="Manager">Manager</option>
             </select>
           </div>
-          @if (signupForm.role().touched() && signupForm.role().errors(); as errors) {
-            <p class="auth-error">{{ errors[0].message }}</p>
+          @if (signupForm.role().touched() && signupForm.role().invalid()) {
+            <p class="auth-error">{{ signupForm.role().errors()[0].message }}</p>
           }
         </div>
 
@@ -135,8 +135,8 @@
                 autocomplete="new-password"
               />
             </div>
-            @if (signupForm.password().touched() && signupForm.password().errors(); as errors) {
-              <p class="auth-error">{{ errors[0].message }}</p>
+            @if (signupForm.password().touched() && signupForm.password().invalid()) {
+              <p class="auth-error">{{ signupForm.password().errors()[0].message }}</p>
             }
           </div>
 
@@ -157,13 +157,13 @@
                 autocomplete="new-password"
               />
             </div>
-            @if (signupForm.confirmPassword().touched() && signupForm.confirmPassword().errors(); as errors) {
-              <p class="auth-error">{{ errors[0].message }}</p>
+            @if (signupForm.confirmPassword().touched() && signupForm.confirmPassword().invalid()) {
+              <p class="auth-error">{{ signupForm.confirmPassword().errors()[0].message }}</p>
             }
           </div>
         </div>
 
-        <button type="button" class="auth-submit" (click)="onSubmit()">
+        <button type="button" [disabled]="signupForm().submitting()" class="auth-submit" (click)="onSubmit()">
           @if (signupForm().submitting()) {
             <span class="auth-spinner"></span>
             Creating account...
