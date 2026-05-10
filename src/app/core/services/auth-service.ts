@@ -18,7 +18,7 @@ export class AuthService {
 
   readonly currentUser = this._authUser.asReadonly();
 
-  isAuthenticated = computed(() => !!this._authUser());
+  readonly isAuthenticated = computed(() => !!this._authUser());
 
   signup(request: SignupRequest): { success: boolean; message: string } {
 
