@@ -5,6 +5,7 @@ import { Employee, EmployeeFormData, DEPARTMENTS, STATUSES } from '../../core/mo
 import { StatsCard } from './components/stats-card/stats-card';
 import { EmployeeTable } from './components/employee-table/employee-table';
 import { EmployeeModal } from './components/employee-modal/employee-modal';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ import { EmployeeModal } from './components/employee-modal/employee-modal';
 export class Dashboard {
   private employeeService = inject(EmployeeService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   readonly stats = this.employeeService.stats;
   readonly departments = DEPARTMENTS;
@@ -87,8 +89,10 @@ export class Dashboard {
     const emp = this.selectedEmployee();
     if (emp) {
       this.employeeService.updateEmployee(emp.id, data);
+      this.toastService.success('Employee updated successfully!');
     } else {
       this.employeeService.addEmployee(data);
+      this.toastService.success('Employee added successfully!');
     }
     this.closeModal();
   }
@@ -96,10 +100,12 @@ export class Dashboard {
   onDeleteEmployee(id: string): void {
     if (confirm('Are you sure you want to remove this employee?')) {
       this.employeeService.deleteEmployee(id);
+      this.toastService.success('Employee deleted successfully!');
     }
   }
 
   logout(): void {
+    this.toastService.info('You have been logged out.');
     this.router.navigate(['/']);
   }
 }

@@ -2,6 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
 import { SignupRequest } from '../../../core/models/signup';
 import { AuthService } from '../../../core/services/auth-service';
+import { Router } from '@angular/router';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-signup',
@@ -20,6 +22,8 @@ export class Signup {
   });
 
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly toastService = inject(ToastService);
 
   protected signupForm = form(this.signupModel, (s) => {
     required(s.name, { message: 'Full name is required' });
@@ -36,16 +40,21 @@ export class Signup {
   });
 
   protected async onSubmit() {
+    let errorMessage = '';
     const success = await submit(this.signupForm, async (f) => {
       const result = this.authService.signup(f().value());
       if (!result.success) {
+        errorMessage = result.message;
         return { kind: 'signupError', message: result.message };
       }
       return;
     });
 
     if (success) {
-      console.log('Signup successful');
+      this.toastService.success('Account created successfully! Welcome.');
+      this.router.navigate(['/dashboard']);
+    } else if (errorMessage) {
+      this.toastService.error(errorMessage);
     }
   }
 }
