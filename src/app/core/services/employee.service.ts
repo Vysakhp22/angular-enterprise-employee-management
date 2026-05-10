@@ -48,7 +48,7 @@ export class EmployeeService {
 
   private readonly _storageService = inject(StorageService);
 
-  private readonly _employees = signal<Employee[]>(this._storageService.get(EmployeeService.STORAGE_KEY, MOCK_EMPLOYEES));
+  private readonly _employees = signal<Employee[]>(this._storageService.get(EmployeeService.STORAGE_KEY, MOCK_EMPLOYEES) ?? MOCK_EMPLOYEES);
 
   readonly employees = this._employees.asReadonly();
 
@@ -64,19 +64,26 @@ export class EmployeeService {
 
   addEmployee(data: EmployeeFormData): void {
     const newEmployee: Employee = { ...data, id: crypto.randomUUID() };
-    this._employees.update(list => [...list, newEmployee]);
-    this._storageService.set(EmployeeService.STORAGE_KEY, this._employees());
+    this._employees.update(list => {
+      const updatedList = [...list, newEmployee];
+      this._storageService.set(EmployeeService.STORAGE_KEY, updatedList);
+      return updatedList;
+    })
   }
 
   updateEmployee(id: string, data: EmployeeFormData): void {
-    this._employees.update(list =>
-      list.map(e => (e.id === id ? { ...e, ...data } : e))
-    );
-    this._storageService.set(EmployeeService.STORAGE_KEY, this._employees());
+    this._employees.update(list => {
+      const updatedList = list.map(e => (e.id === id ? { ...e, ...data } : e));
+      this._storageService.set(EmployeeService.STORAGE_KEY, updatedList);
+      return updatedList;
+    });
   }
 
   deleteEmployee(id: string): void {
-    this._employees.update(list => list.filter(e => e.id !== id));
-    this._storageService.set(EmployeeService.STORAGE_KEY, this._employees());
+    this._employees.update(list => {
+      const updated = list.filter(e => e.id !== id);
+      this._storageService.set(EmployeeService.STORAGE_KEY, updated);
+      return updated;
+    });
   }
 }
